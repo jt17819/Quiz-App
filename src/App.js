@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Outlet, Link } from "react-router-dom";
-import Home from "./components/Home";
-import axios from "axios";
+import Home from './components/Home'
+import axios from 'axios'
+import NavBar from './components/NavBar';
 import Question from "./components/Question";
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
   return (
     <div className="App">
       <header>
+        <NavBar />
         <nav>
           <Link to="/">Home</Link>
           <Link to="/quiz">Quiz</Link>
