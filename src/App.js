@@ -3,6 +3,7 @@ import './App.css';
 import { Outlet, Link } from "react-router-dom";
 import Home from './components/Home'
 import axios from 'axios'
+import NavBar from './components/NavBar';
 
 
 
@@ -40,11 +41,7 @@ function App() {
   return (
     <div className="App">
       <header>
-        <nav>
-          <Link to='/'>Home</Link>
-          <Link to='/quiz'>Quiz</Link>
-          <Link to='/leaderboard'>Leaderboard</Link>
-        </nav>
+        <NavBar />
       </header>
       <Home categories={categories}/>
     <Outlet/>
