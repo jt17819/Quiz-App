@@ -1,53 +1,34 @@
-import React,{useEffect, useState } from 'react';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
 import { Outlet, Link } from "react-router-dom";
-import Home from './components/Home'
-import axios from 'axios'
+import {Home} from './pages';
+import NavBar from './components/NavBar';
+import {Routes, Route}  from "react-router-dom"
 
 
 
 function App() {
-  const [loadingCategories, setLoadingCategories] = useState(false);
-  const [categories, setCategories] = useState([]);
-  const [error, setError] = useState(false);
+  // const [loadingCategories, setLoadingCategories] = useState(false);
+  // const [categories, setCategories] = useState([]);
+  // const [error, setError] = useState(false);
 
-  useEffect(() => {
-    setLoadingCategories(true)
-
-    let cancel
-
-      axios({
-        method: 'GET',
-        url: 'https://opentdb.com/api_category.php',
-        cancelToken: new axios.CancelToken(c => (cancel = c)),
-
-        
-      }).then(({ data }) => {
-        setCategories(data.trivia_categories)
-				setLoadingCategories(false)
-      }).catch(error => {
-				if (axios.isCancel(error)) return
-				console.log(error)
-				setLoadingCategories(false)
-				setError(
-					'Error loading categories'
-				)
-  })
-  return () => cancel() },
   
-  [])
-     
+
   return (
-    <div className="App">
-      <header>
-        <nav>
-          <Link to='/'>Home</Link>
-          <Link to='/quiz'>Quiz</Link>
-          <Link to='/leaderboard'>Leaderboard</Link>
-        </nav>
-      </header>
-      <Home categories={categories}/>
-    <Outlet/>
+    <div className="App"> 
+    <header>
+    <NavBar />
+    </header>
+      <Routes>
+      
+      {/* <Route path="/" element={<Welcome/>}/> */}
+      <Route path="/" element={<Home/>}/>
+      {/* <Route path="/leaderboard" element={<Leaderboard/>}/>
+      <Route path="/quiz" element={<Quiz/>}/> */}
+      {/* <Route path="/score" element={<Score/>}/>
+      <Route path="/lobby" element={<Lobby/>}/> */}
+      </Routes>
+      <Outlet />
     </div>
   );
 }
