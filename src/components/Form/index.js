@@ -57,7 +57,7 @@ const Form = () => {
       difficulty: difficultySelection,
     };
     dispatch(fetchQuiz(apiOptions));
-    navigate("/lobby");
+    navigate("/quiz");
     console.log("hitting API");
   };
   let questionNumberOptions = [];
