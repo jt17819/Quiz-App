@@ -1,0 +1,74 @@
+:root {
+  --heading-text: "Pacifico";
+  --content-text: "Nunito", sans-serif;
+  /* --content: white; */
+}
+
+#leaderboard-page {
+  /* background-image: url('../../images/leaderboard-desktop.jpg'); */
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-left: 2.8rem;
+}
+
+body {
+  /* color: whitesmoke; */
+}
+
+h2 {
+  /* padding-top: 12rem; */
+  font-family: var(--content-text);
+  font-size: 1.8rem;
+}
+
+.score-container {
+  overflow: auto;
+  max-height: 240px;
+  min-width: 500px;
+  font-family: var(--content-text);
+  margin-bottom: 1rem;
+}
+
+.leaderboard-score {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 3rem;
+  margin-left: 3rem;
+}
+
+#start-again {
+  padding: 0.5rem 1rem;
+  background-color: whitesmoke;
+  border-radius: 0.5rem;
+  color: #65c75e;
+  font-size: 1.1rem;
+}
+
+#start-again:hover {
+  background-color: #65c75e;
+  /* color: whitesmoke; */
+  transition-duration: 0.3s;
+}
+
+@media screen and (max-width: 450px) {
+  #leaderboard-page {
+    /* background-image: url("../../images/leaderboard-mobile.jpg"); */
+    padding-left: 0rem;
+  }
+  #leaderboard-page h2 {
+    margin-top: -11rem;
+    font-size: 1.5rem;
+  }
+  .score-container {
+    max-height: 190px;
+    min-width: 250px;
+    margin-bottom: 1rem;
+    margin-bottom: 1rem;
+  }
+}
