@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Outlet, Link } from "react-router-dom";
-import {Home, Quiz} from './pages';
+import {Home, Quiz, Welcome, Lobby} from './pages';
 import NavBar from './components/NavBar';
 import {Routes, Route}  from "react-router-dom";
+
+
 
 
 
@@ -21,13 +23,13 @@ function App() {
     </header>
       <Routes>
       
-      {/* <Route path="/" element={<Welcome/>}/> */}
+      <Route path="/" element={<Welcome/>}/>
       <Route path="/" element={<Home/>}/>
       {/* <Route path="/leaderboard" element={<Leaderboard/>}/> */}
       <Route path="/quiz" element={<Quiz/>}/>
       {/* Remember to add element to path - score */}
       <Route path="/score" />
-      {/* <Route path="/lobby" element={<Lobby/>}/>  */}
+      <Route path="/lobby" element={<Lobby/>}/> 
       </Routes>
       <Outlet />
     </div>
