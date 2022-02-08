@@ -24,7 +24,7 @@ function App() {
       <Routes>
       
       <Route path="/" element={<Welcome/>}/>
-      <Route path="/" element={<Home/>}/>
+      <Route path="/home" element={<Home/>}/>
       {/* <Route path="/leaderboard" element={<Leaderboard/>}/> */}
       <Route path="/quiz" element={<Quiz/>}/>
       {/* Remember to add element to path - score */}
