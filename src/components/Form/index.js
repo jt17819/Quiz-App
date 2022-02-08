@@ -57,6 +57,14 @@ const Form = () => {
       difficulty: difficultySelection,
     };
     dispatch(fetchQuiz(apiOptions));
+    navigate("/quiz");
+    const categoryName = categories.find((c) => {
+      return c.id === parseInt(category);
+    }).name;
+
+    
+
+    dispatch(fetchQuiz(apiOptions, categoryName));
     navigate("/lobby");
     console.log("hitting API");
   };

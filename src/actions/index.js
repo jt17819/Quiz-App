@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const fetchQuiz = (apiOptions) => {
+export const fetchQuiz = (apiOptions, categoryName) => {
   return async (dispatch) => {
     try {
       const { data } = await axios({
@@ -19,7 +19,7 @@ export const fetchQuiz = (apiOptions) => {
 
       dispatch({
         type: "LOAD_QUESTIONS",
-        payload: quizData,
+        payload: [quizData, categoryName],
       });
     } catch (err) {
       console.warn(err.message);
