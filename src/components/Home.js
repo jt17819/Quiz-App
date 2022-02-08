@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CardContent from '@material-ui/core/CardContent';
+import Card from '@material-ui/core/Card';
+import Box from '@material-ui/core/Box';
+import { makeStyles } from '@material-ui/core/styles';
 import Question from "./Question";
 import axios from "axios";
 export const apiContext = React.createContext();
@@ -97,24 +101,49 @@ const Home = ({ categories }) => {
     setApiData(apiOptions);
   };
 
+  const useStyles = makeStyles({
+    style: {
+      backgroundColor: "#140100",
+    },
+    writing: {
+      color: "white"
+    },
+    box: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      minHeight: "90vh"
+    }
+  })
+
+  const classes = useStyles();
+
   return (
     <apiContext.Provider value={{ apiData }}>
       <div className="formContainer">
+        <Box className={classes.box}>
+        <Card className={ classes.style }>
+        <CardContent >
         <form onSubmit={handleSubmit}>
-          <label htmlFor="players">Players</label>
+          <ul>
+          <label htmlFor="players" className={classes.writing}>Players</label>
           <select id="players">
             <option value="1">1</option>
             <option value="2">2</option>
           </select>
+          </ul>
 
-          <label htmlFor="numOfQuestions">How many questions</label>
+          <ul>
+          <label htmlFor="numOfQuestions" className={classes.writing}>How many questions</label>
           <select id="numOfQuestions" onChange={numberOfQuestionsChange}>
             {questionNUmberOprions.map((e, i) => {
               return <option value={e}>{parseInt(e)}</option>;
             })}
           </select>
+          </ul>
 
-          <label htmlFor="category">Category</label>
+          <ul>
+          <label htmlFor="category" className={classes.writing}>Category</label>
           <select id="category" onChange={chnageCategory}>
             {categories.map((category) => (
               <option value={category.id} key={category.id}>
@@ -122,21 +151,30 @@ const Home = ({ categories }) => {
               </option>
             ))}
           </select>
+          </ul>
 
-          <label htmlFor="difficulty">Difficulty</label>
+          <ul>
+          <label htmlFor="difficulty" className={classes.writing}>Difficulty</label>
           <select id="difficulty" onChange={chnageDifficulty}>
             <option value="">Any Difficulty</option>
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
           </select>
+          </ul>
+
+          <ul>
           <input
             type="submit"
             id="startQuiz"
             value="Start"
             onClick={handleSubmit}
           />
+          </ul>
         </form>
+        </CardContent>
+        </Card>
+        </Box>
       </div>
       <br></br>
       {/* <Question difficulty={ }/> */}

@@ -38,11 +38,6 @@ function App() {
     <div className="App">
       <header>
         <NavBar />
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/quiz">Quiz</Link>
-          <Link to="/leaderboard">Leaderboard</Link>
-        </nav>
       </header>
       <Home categories={categories} />
       <Outlet />
