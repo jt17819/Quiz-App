@@ -2,43 +2,54 @@ import { apiContext } from "./Home";
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 
-const Question = () => {
+const API = `https://opentdb.com/api.php?amount=10&category=21&difficulty=easy`;
+
+const Question = ({ category, difficulty }) => {
   const [questionBank, setQuestionsBank] = useState([]);
   const { apiData } = useContext(apiContext);
-  console.log(apiData);
+  console.log("params", apiData);
+
   useEffect(() => {
     const getQuestions = async (apiData) => {
+      console.log("hitting API");
       try {
         const { data } = await axios({
           method: "GET",
-          url: `https://opentdb.com/api.php`,
-          params: { ...apiData },
+          url: `https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}`,
+          // params: { category, difficulty },
+        });
+      } catch (err) {
+        console.log("error", err);
+      }
+    };
+
+    const getResult = async () => {
+      try {
+        const data = await getQuestions();
+        console.log("data", data);
+        await data.results.map((questionItem, index) => {
+          const options = [
+            ...questionItem.incorrect_answers,
+            questionItem.correct_answer,
+          ];
+          return {
+            id: `${index}-${Date.now()}`,
+            question: questionItem.question,
+            answer: questionItem.correct_answer,
+            options: options.sort(() => Math.random() - 0.5),
+          };
         });
 
-        setQuestionsBank(
-          await data.results.map((questionItem, index) => {
-            const options = [
-              ...questionItem.incorrect_answers,
-              questionItem.correct_answer,
-            ];
-            return {
-              id: `${index}-${Date.now()}`,
-              question: questionItem.question,
-              answer: questionItem.correct_answer,
-              options: options.sort(() => Math.random() - 0.5),
-            };
-          })
-        );
-        console.log(questionBank);
-        console.log(data);
+        setQuestionsBank(data.results.map);
       } catch (error) {
         console.log(error);
       }
     };
-    getQuestions(apiData);
-  }, [apiData, questionBank]);
 
-  return <div>hello</div>;
+    getResult();
+  }, []);
+
+  return <div>{questionBank}</div>;
 };
 
 // const handleSubmit = async (e) => {
