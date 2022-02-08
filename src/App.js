@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import { Outlet, Link } from "react-router-dom";
-import {Home, Welcome, Lobby} from './pages';
+import {Home, Quiz, Welcome, Lobby} from './pages';
 import NavBar from './components/NavBar';
-import {Routes, Route}  from "react-router-dom"
+import {Routes, Route}  from "react-router-dom";
 
 
 
@@ -25,10 +25,11 @@ function App() {
       
       <Route path="/" element={<Welcome/>}/>
       <Route path="/home" element={<Home/>}/>
-      {/* <Route path="/leaderboard" element={<Leaderboard/>}/>
-      <Route path="/quiz" element={<Quiz/>}/> */}
-      {/* <Route path="/score" element={<Score/>}/> */}
-      <Route path="/lobby" element={<Lobby/>}/>
+      {/* <Route path="/leaderboard" element={<Leaderboard/>}/> */}
+      <Route path="/quiz" element={<Quiz/>}/>
+      {/* Remember to add element to path - score */}
+      <Route path="/score" />
+      <Route path="/lobby" element={<Lobby/>}/> 
       </Routes>
       <Outlet />
     </div>
