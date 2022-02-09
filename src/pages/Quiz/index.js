@@ -2,6 +2,8 @@ import React from "react";
 // import "./style.css";
 import { AnswerCard, Question } from "../../components";
 import { useSelector} from "react-redux";
+import { makeStyles } from "@material-ui/core";
+import { CardContent, Card, Box } from "@material-ui/core";
 
 const Quiz = () => {
   
@@ -32,13 +34,43 @@ const Quiz = () => {
 
 //Use the shuffled array and for each answer in the array map over it 
   const shuffledAnswers = randomAnswers(answers);
+
+  // Adding Material UI
+  const useStyles = makeStyles({
+    mainStyle: {
+      backgroundColor: "#7f7e7a",
+      color: "#61DBFB",
+      fontSize: "20px"
+    },
+    cardStyle: {
+      backgroundColor: "#140100"
+    },
+    box: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      minHeight: "90vh"
+    },
+    writing: {
+      color: "white",
+      fontSize: "20px"
+    }
+  });
+
+  const classes = useStyles();
  
   return (
-    <div role="quiz-container" id="quiz-page">
-      <Question question={question} index={index} />
+    <div role="quiz-container" id="quiz-page" className={classes.mainStyle}>
+    <Box className={classes.box}>
+      <Card className={ classes.cardStyle }>
+      <CardContent  className={classes.writing}>
+      <Question question={question} index={index}/>
 
       {shuffledAnswers &&
-        shuffledAnswers.map((answer) => <AnswerCard answer={answer} index={index} />)} 
+        shuffledAnswers.map((answer) => <AnswerCard answer={answer} index={index}/>)}
+        </CardContent>
+        </Card>
+        </Box>
     </div>
   );
   

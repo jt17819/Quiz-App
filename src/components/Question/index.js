@@ -30,7 +30,7 @@ containsEncodedComponents(props.question);
 
   return (
     <div role="question-container" id="question-container">
-      <h3 style={{ color: "black" }}><span id="question-num">Question {questionNumber} of {questionArrayLength}:</span> <br></br> 
+      <h3><span id="question-num">Question {questionNumber} of {questionArrayLength}:</span> <br></br> 
         {containsEncodedComponents(props.question)}
       </h3>
     </div>

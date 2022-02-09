@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import {useSelector} from 'react-redux'
 import { endQuestions, changeQuestion} from "../../actions";
 import {useNavigate} from 'react-router-dom';
+import { makeStyles } from "@material-ui/core";
 
 const AnswerCard = (props) => {
 
@@ -31,16 +32,28 @@ const AnswerCard = (props) => {
   let decodedAnswers = containsEncodedComponents(props.answer)
   console.log(props.index)
 
+  const useStyles = makeStyles({
+    button: {
+      backgroundColor: "#140100",
+      color: "#61DBFB",
+      marginTop: "10px",
+      fontSize: "20px",
+      margin: "10px"
+    }
+  });
+
+  const classes = useStyles();
+
 if (props.index === questionArrayLength-1){
  return(
-     <button id="answer-cards" onClick = {handleFinalAnswer}>{decodedAnswers}</button>
+     <button id="answer-cards" onClick = {handleFinalAnswer} className={classes.button}>{decodedAnswers}</button>
 
  )
 
 
 }else{
    return (
-     <button id="answer-cards" onClick={() => nextQuestion(props.answer)}>{decodedAnswers}</button>
+     <button id="answer-cards" onClick={() => nextQuestion(props.answer)} className={classes.button}>{decodedAnswers}</button>
  );
 }
 };
