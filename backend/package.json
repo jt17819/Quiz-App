@@ -1,0 +1,27 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./api/index.js",
+  "scripts": {
+    "start": "nodemon ./api/index.js",
+    "test": "jest --setupFiles ./tests/integration/mongo-test-environment.js --watchAll --detectOpenHandles --runInBand --verbose"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "mongodb": "^4.3.0"
+  },
+  "devDependencies": {
+    "jest": "^27.4.7",
+    "jest-circus": "^27.4.6",
+    "mongodb-memory-server": "^8.2.0",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
+  },
+  "engines": {
+    "node": "16.13.0"
+  }
+}
