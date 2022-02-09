@@ -76,11 +76,7 @@ const Form = () => {
   return (
     <div className="formContainer">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="players">Players</label>
-        <select id="players">
-          <option value="1">1</option>
-          <option value="2">2</option>
-        </select>
+      
 
         <label htmlFor="numOfQuestions">How many questions</label>
         <select id="numOfQuestions" onChange={numberOfQuestionsChange}>
