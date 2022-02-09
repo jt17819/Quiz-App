@@ -4,6 +4,7 @@ import axios from "axios";
 // import {ResultsBanner} from '../../components';
 import { makeStyles } from '@material-ui/core';
 import { CardContent, Card, Box } from '@material-ui/core';
+import Question_Mark_Background from '../../images/Question_Mark_Background.png';
 
 const Score = () => {
   const username = useSelector((state) => state.user.user.username);
@@ -18,10 +19,9 @@ const Score = () => {
    // Adding Material UI
    const useStyles = makeStyles({
     mainStyle: {
-      backgroundColor: "#7f7e7a",
-      color: "#61DBFB",
-      fontSize: "20px"
-    },
+        backgroundImage: `url(${Question_Mark_Background})`,
+        backgroundSize: "cover"
+      },
     cardStyle: {
       backgroundColor: "#140100"
     },
@@ -45,7 +45,6 @@ const Score = () => {
       <Card className={ classes.cardStyle }>
       <CardContent  className={classes.writing}>
       <div id="playerscore">
-        {/* <h2>You scored: {score[0]} points</h2> */}
         {players.map((p, i) => (
           <p>
             {p} Score: {score[i]}
