@@ -5,3 +5,4 @@ export { default as LobbyStatus } from "./LobbyStatus";
 export { default as PlayerBubble } from "./PlayerBubble";
 export { default as LeaderboardScore } from "./LeaderboardScore";
 export { default as LeaderboardTable } from "./LeaderboardTable";
+export { default as Timer } from "./Timer";
