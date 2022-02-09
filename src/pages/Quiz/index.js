@@ -1,8 +1,12 @@
 import React from "react";
 // import "./style.css";
-import { AnswerCard, Question } from "../../components";
+
+
+import { makeStyles, CardContent, Card, Box } from '@material-ui/core';
+import { AnswerCard, Question, Timer } from "../../components";
 import { useSelector, useDispatch } from "react-redux";
 import { moveToNextQuestion } from "../../actions";
+
 const Quiz = () => {
   const dispatch = useDispatch();
   const currentQuestion = useSelector(
@@ -40,10 +44,39 @@ const Quiz = () => {
   //Use the shuffled array and for each answer in the array map over it
   const shuffledAnswers = randomAnswers(answers);
 
+  // Adding Material UI
+  const useStyles = makeStyles({
+    mainStyle: {
+      backgroundColor: "#7f7e7a",
+      color: "#61DBFB",
+      fontSize: "20px"
+    },
+    cardStyle: {
+      backgroundColor: "#140100"
+    },
+    box: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      minHeight: "90vh"
+    },
+    writing: {
+      color: "white",
+      fontSize: "20px"
+    }
+  });
+
+  const classes = useStyles();
+
   return (
-    <div role="quiz-container" id="quiz-page">
+    <div role="quiz-container" id="quiz-page" className={classes.mainStyle}>
+        <Box className={classes.box}>
+      <Card className={ classes.cardStyle }>
+      <CardContent  className={classes.writing}>
+      <Timer timer={Timer} />
       <p>{players[playerTurn]} it's your turn</p>
       <Question question={question} index={currentQuestion} />
+
 
       {shuffledAnswers &&
         shuffledAnswers.map((answer) => (
@@ -53,6 +86,9 @@ const Quiz = () => {
             playerTurn={playerTurn}
           />
         ))}
+        </CardContent>
+        </Card>
+        </Box>
     </div>
   );
 };

@@ -3,6 +3,8 @@ import axios from "axios";
 import { fetchQuiz } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { makeStyles } from '@material-ui/core';
+import { CardContent, Card, Box } from "@material-ui/core";
 
 const Form = () => {
   const [difficultySelection, setdifficultySelection] = useState("");
@@ -70,10 +72,44 @@ const Form = () => {
     questionNumberOptions.push(i);
   }
 
+    // Adding Material UI
+    const useStyles = makeStyles({
+      mainStyle: {
+        backgroundColor: "#7f7e7a"
+      },
+      cardStyle: {
+        backgroundColor: "#140100"
+      },
+      box: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "90vh"
+      },
+      writing: {
+        color: "white",
+        fontSize: "20px",
+        padding: "10px"
+      },
+      button: {
+        backgroundColor: "#140100",
+        color: "#61DBFB",
+        marginTop: "10px",
+        fontSize: "20px"
+      }
+    });
+
+    const classes = useStyles();
+
   return (
-    <div className="formContainer">
+    <div className="formContainer" className={classes.mainStyle}>
+      <Box className={classes.box}>
+      <Card className={ classes.cardStyle }>
+      <CardContent >
       <form onSubmit={handleSubmit}>
-        <label htmlFor="numOfQuestions">How many questions</label>
+      
+        <ul>
+        <label htmlFor="numOfQuestions" className={classes.writing}>How many questions:</label>
         <select id="numOfQuestions" onChange={numberOfQuestionsChange}>
           {questionNumberOptions.map((e, i) => {
             return (
@@ -83,8 +119,10 @@ const Form = () => {
             );
           })}
         </select>
+        </ul>
 
-        <label htmlFor="category">Category</label>
+        <ul>
+        <label htmlFor="category" className={classes.writing}>Category:</label>
         <select id="category" onChange={changeCategory}>
           {categories.map((category) => (
             <option value={category.id} key={category.id}>
@@ -92,21 +130,31 @@ const Form = () => {
             </option>
           ))}
         </select>
+        </ul>
 
-        <label htmlFor="difficulty">Difficulty</label>
+        <ul>
+        <label htmlFor="difficulty" className={classes.writing}>Difficulty:</label>
         <select id="difficulty" onChange={changeDifficulty}>
           <option value="">Any Difficulty</option>
           <option value="easy">Easy</option>
           <option value="medium">Medium</option>
           <option value="hard">Hard</option>
         </select>
+        </ul>
+
+        <ul>
         <input
           type="submit"
           id="startQuiz"
           value="Start"
           onClick={handleSubmit}
+          className={classes.button}
         />
+        </ul>
       </form>
+      </CardContent>
+      </Card>
+      </Box>
     </div>
   );
 };
