@@ -3,6 +3,7 @@ import { LobbyStatus, PlayerBubble } from "../../components";
 import { useSelector } from "react-redux";
 import { makeStyles } from '@material-ui/core';
 import { CardContent, Card, Box } from '@material-ui/core';
+import Question_Mark_Background from '../../images/Question_Mark_Background.png';
 
 const Lobby = () => {
   // const players = ['player1', 'player2', 'player3']// this will come from redux
@@ -14,7 +15,8 @@ const Lobby = () => {
   // Adding Material UI
   const useStyles = makeStyles({
     mainStyle: {
-      backgroundColor: "#7f7e7a"
+      backgroundImage: `url(${Question_Mark_Background})`,
+      backgroundSize: "cover"
     },
     cardStyle: {
       backgroundColor: "#140100"

@@ -1,11 +1,11 @@
 import React from "react";
 // import "./style.css";
 
-
 import { makeStyles, CardContent, Card, Box } from '@material-ui/core';
 import { AnswerCard, Question, Timer } from "../../components";
 import { useSelector, useDispatch } from "react-redux";
 import { moveToNextQuestion } from "../../actions";
+import Question_Mark_Background from '../../images/Question_Mark_Background.png';
 
 const Quiz = () => {
   const dispatch = useDispatch();
@@ -47,10 +47,9 @@ const Quiz = () => {
   // Adding Material UI
   const useStyles = makeStyles({
     mainStyle: {
-      backgroundColor: "#7f7e7a",
-      color: "#61DBFB",
-      fontSize: "20px"
-    },
+        backgroundImage: `url(${Question_Mark_Background})`,
+        backgroundSize: "cover"
+      },
     cardStyle: {
       backgroundColor: "#140100"
     },
