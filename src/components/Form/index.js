@@ -33,7 +33,6 @@ const Form = () => {
 
   const numberOfQuestionsChange = (e) => {
     const { value } = e.target;
-    console.log("changing number of questions", value);
     setNumberOfQuestions(value);
   };
 
@@ -62,8 +61,6 @@ const Form = () => {
       return c.id === parseInt(category);
     }).name;
 
-    
-
     dispatch(fetchQuiz(apiOptions, categoryName));
     navigate("/lobby");
     console.log("hitting API");
@@ -76,16 +73,14 @@ const Form = () => {
   return (
     <div className="formContainer">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="players">Players</label>
-        <select id="players">
-          <option value="1">1</option>
-          <option value="2">2</option>
-        </select>
-
         <label htmlFor="numOfQuestions">How many questions</label>
         <select id="numOfQuestions" onChange={numberOfQuestionsChange}>
           {questionNumberOptions.map((e, i) => {
-            return <option value={e}>{parseInt(e)}</option>;
+            return (
+              <option key={e} value={e}>
+                {parseInt(e)}
+              </option>
+            );
           })}
         </select>
 

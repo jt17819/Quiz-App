@@ -14,6 +14,7 @@ const userReducer = (state = initState, action) => {
     case "SET_ERROR":
       return { ...state, error: action.payload };
     case "SET_HOST":
+        console.log(action.payload)
       return {
         ...state,
         user: action.payload,

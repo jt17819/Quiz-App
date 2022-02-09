@@ -7,20 +7,24 @@ const Welcome = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [playerCount, setPlayerCount] = useState(0);
-  const [userInput, setUsrInput] = useState(undefined);
-  const [room, setRoom] = useState(undefined);
+  const [playerCount, setPlayerCount] = useState([0]);
+  const [userInput, setUserInput] = useState([""]);
+  const [room, setRoom] = useState(1);
   const [error, setError] = useState("");
 
-  const handleInput = (e) => {
-    setError("");
-    setUsrInput(e.target.value);
+  const handleInput = (p) => {
+    return function (e) {
+      const value = e.target.value;
+      setError("");
+      setUserInput(userInput.map((user, i) => (p === i ? value : user)));
+      
+    };
   };
 
-  const handleRoomInput = (e) => {
-    setError("");
-    setRoom(e.target.value);
-  };
+  //   const handleRoomInput = (e) => {
+  //     setError("");
+  //     setRoom(e.target.value);
+  //   };
 
   const handleCreate = (e) => {
     e.preventDefault();
@@ -30,6 +34,8 @@ const Welcome = () => {
       setError("Don't be rude, introduce yourself!");
     } else if (room === undefined) {
       setError("You need to create room or give an existing name");
+    } else if (userInput.includes("")) {
+      setError("Please Give All Players A Name");
     } else {
       setRoom(room);
       dispatch(setHost(player, room));
@@ -51,39 +57,66 @@ const Welcome = () => {
       navigate("/lobby");
     }
   };
-  const renderJoin = () => {
-    let tags = null;
+  //   const renderJoin = () => {
+  //     let tags = null;
 
-    if (playerCount < 2) {
-      tags = "disabled";
+  //     if (playerCount < 2) {
+  //       tags = "disabled";
+  //     }
+  //     return (
+  //       <>
+  //         <input
+  //           type="submit"
+  //           className={tags}
+  //           name="joinQuiz"
+  //           value="Join"
+  //           onClick={handleJoin}
+  //         />
+  //       </>
+  //     );
+  //   };
+
+  const changeNumPlayers = (e) => {
+    const { value } = e.target;
+    let numPlayers = [];
+    let users = [];
+    for (let i = 0; i < value; i++) {
+      numPlayers.push(i);
+      users.push("");
     }
-    return (
-      <>
-        <input
-          type="submit"
-          className={tags}
-          name="joinQuiz"
-          value="Join"
-          onClick={handleJoin}
-        />
-      </>
-    );
+    setPlayerCount(numPlayers);
+    setUserInput(users);
+    console.log(playerCount);
   };
 
   return (
     <div id="welcome">
       <form autoComplete="off">
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          placeholder="Choose your player name"
-          value={userInput}
-          onChange={handleInput}
-        />
+        <label htmlFor="players">Players</label>
+        <select id="players" onChange={changeNumPlayers}>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
 
-        <label htmlFor="roomName">Room Name</label>
+        {playerCount.map((p) => {
+          return (
+            <div key={"username" + p + 1}>
+              <label htmlFor={"username" + p + 1}>Player {p + 1}</label>
+              <input
+                type="text"
+                id={"username" + p + 1}
+                name={"username" + p + 1}
+                placeholder="Choose your player name"
+                value={userInput[p]}
+                onChange={handleInput(p)}
+              />
+            </div>
+          );
+        })}
+
+        {/* <label htmlFor="roomName">Room Name</label>
         <input
           type="text"
           id="roomName"
@@ -91,7 +124,7 @@ const Welcome = () => {
           placeholder="Pick a room name (max 4 players)"
           value={room}
           onChange={handleRoomInput}
-        />
+        /> */}
 
         <input
           type="submit"
@@ -99,14 +132,14 @@ const Welcome = () => {
           value="New Game"
           onClick={handleCreate}
         />
-        {renderJoin()}
+        {/* {renderJoin()} */}
       </form>
-      <p>
+      <div>
         {playerCount <= 1
           ? "No Players Online"
-          : `Total players online: ${playerCount - 1}`}
-        {error && <div className="error">{error}</div>}
-      </p>
+          : `Total players online: ${playerCount.length}`}
+        {error && <p className="error">{error}</p>}
+      </div>
     </div>
   );
 };
