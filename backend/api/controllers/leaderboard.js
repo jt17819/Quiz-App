@@ -13,8 +13,9 @@ async function index (req, res) {
 
 async function upsert(req,res) {
     try{
-        const leaderboard = await Leaderboard.findByOrCreate(req.body.category, req.body.name, req.body.score);
-        console.log(req.body.category, req.body.name, req.body.score);
+        console.log('req',req.body)
+        const leaderboard = await Leaderboard.findByOrCreate(req.body.body.category, req.body.body.name, req.body.body.score);
+        console.log(req.body.body.category, req.body.body.name, req.body.body.score);
         res.status(200).json(leaderboard);
     }catch(err){
         res.status(500).json({err})
