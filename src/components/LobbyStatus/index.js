@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchQuiz } from "../../actions";
 // import { socket } from "../../socket";
 import "./style.css";
+import { makeStyles } from '@material-ui/core';
 
 const LobbyStatus = ({ host }) => {
   const navigate = useNavigate();
@@ -45,9 +46,21 @@ const LobbyStatus = ({ host }) => {
     navigate("/quiz");
   };
 
+  // Using Material UI
+  const useStyles = makeStyles({
+    button: {
+      backgroundColor: "#140100",
+      color: "#61DBFB",
+      marginTop: "10px",
+      fontSize: "20px"
+    }
+  });
+  
+  const classes = useStyles();
+
   if (usertype === "HOST") {
     return (
-      <button id="start-game" onClick={handleClick}>
+      <button id="start-game" onClick={handleClick} className={classes.button}>
         Start Game
       </button>
       // onclick fetch questions and go to quiz page

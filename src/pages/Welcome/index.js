@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { setHost, setPlayer, setID } from "../../actions/userType";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { makeStyles } from "@material-ui/core";
+import { Card, CardContent, Box } from "@material-ui/core";
+import { fontSize } from "@mui/system";
 
 const Welcome = () => {
   const dispatch = useDispatch();
@@ -89,10 +92,43 @@ const Welcome = () => {
     console.log(playerCount);
   };
 
+  // Adding Material UI
+  const useStyles = makeStyles({
+    mainStyle: {
+      backgroundColor: "#7f7e7a"
+    },
+    cardStyle: {
+      backgroundColor: "#140100",
+      padding: "10px"
+    },
+    box: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      minHeight: "90vh"
+    },
+    writing: {
+      color: "white",
+      fontSize: "20px",
+      padding: "10px"
+    },
+    button: {
+      backgroundColor: "#140100",
+      color: "#61DBFB",
+      marginTop: "10px",
+      fontSize: "20px"
+    }
+  });
+
+  const classes = useStyles();
+
   return (
-    <div id="welcome">
+    <div id="welcome" className={classes.mainStyle}>
+      <Box className={classes.box}>
+      <Card className={ classes.cardStyle }>
+      <CardContent >
       <form autoComplete="off">
-        <label htmlFor="players">Players</label>
+        <label htmlFor="players" className={classes.writing}>Players:</label>
         <select id="players" onChange={changeNumPlayers}>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -103,7 +139,7 @@ const Welcome = () => {
         {playerCount.map((p) => {
           return (
             <div key={"username" + p + 1}>
-              <label htmlFor={"username" + p + 1}>Player {p + 1}</label>
+              <label htmlFor={"username" + p + 1} className={classes.writing}>Player {p + 1}:</label>
               <input
                 type="text"
                 id={"username" + p + 1}
@@ -131,15 +167,19 @@ const Welcome = () => {
           name="newQuiz"
           value="New Game"
           onClick={handleCreate}
+          className={classes.button}
         />
         {/* {renderJoin()} */}
       </form>
-      <div>
+      <div className={classes.writing}>
         {playerCount <= 1
           ? "No Players Online"
           : `Total players online: ${playerCount.length}`}
         {error && <p className="error">{error}</p>}
       </div>
+      </CardContent>
+      </Card>
+      </Box>
     </div>
   );
 };
