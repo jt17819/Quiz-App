@@ -14,14 +14,52 @@ const Score = () => {
   //   const [players, setPlayers] = useState("");
   const room = useSelector((state) => state.user.room);
   const players = useSelector((state) => state.user.user.username);
+  const categoryName = useSelector((state) => state.quizReducer.categoryName);
   console.log(score, "hello");
 
-   // Adding Material UI
-   const useStyles = makeStyles({
+  const sendResults = (categoryName, playerName, playerScore) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const options = {
+          headers: { 'Content-Type': 'application/json' },
+          body: {
+            "category": categoryName,
+            "name": playerName,
+            "score": playerScore
+          }
+        }
+        // const body = {
+        //   "category": categoryName,
+        //   "name": playerName,
+        //   "score": playerScore
+        // }
+        console.log(results);
+        const { data } = await axios.post(`http://localhost:5000/leaderboard`, options)
+
+        if (data.err) {
+          throw Error(data.err)
+        }
+        resolve('Scores sent to leaderboard!')
+      } catch (err) {
+        reject(`Can't send results: ${err}`);
+      }
+    })
+  }
+
+
+  useEffect(() => {
+    console.log('catname',categoryName)
+    players.forEach((player, i) => {
+      sendResults(categoryName, player, score[i])
+    })
+  }, [categoryName, score, players])
+
+  // Adding Material UI
+  const useStyles = makeStyles({
     mainStyle: {
-        backgroundImage: `url(${Question_Mark_Background})`,
-        backgroundSize: "cover"
-      },
+      backgroundImage: `url(${Question_Mark_Background})`,
+      backgroundSize: "cover"
+    },
     cardStyle: {
       backgroundColor: "#140100"
     },
@@ -41,18 +79,18 @@ const Score = () => {
 
   return (
     <div id="score-page" className={classes.mainStyle}>
-        <Box className={classes.box}>
-      <Card className={ classes.cardStyle }>
-      <CardContent  className={classes.writing}>
-      <div id="playerscore">
-        {players.map((p, i) => (
-          <p>
-            {p} Score: {score[i]}
-          </p>
-        ))}
-      </div>
-      </CardContent>
-      </Card>
+      <Box className={classes.box}>
+        <Card className={classes.cardStyle}>
+          <CardContent className={classes.writing}>
+            <div id="playerscore">
+              {players.map((p, i) => (
+                <p>
+                  {p} Score: {score[i]}
+                </p>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       </Box>
     </div>
   );
