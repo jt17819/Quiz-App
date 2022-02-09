@@ -1,6 +1,6 @@
 import React from "react";
 // import "./style.css";
-import { AnswerCard, Question } from "../../components";
+import { AnswerCard, Question, Timer } from "../../components";
 import { useSelector} from "react-redux";
 
 const Quiz = () => {
@@ -35,6 +35,7 @@ const Quiz = () => {
  
   return (
     <div role="quiz-container" id="quiz-page">
+      <Timer timer={Timer} />
       <Question question={question} index={index} />
 
       {shuffledAnswers &&
