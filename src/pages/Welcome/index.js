@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
 import { Card, CardContent, Box } from "@material-ui/core";
 import { fontSize } from "@mui/system";
+import Question_Mark_Background from '../../images/Question_Mark_Background.png';
 
 const Welcome = () => {
   const dispatch = useDispatch();
@@ -95,7 +96,8 @@ const Welcome = () => {
   // Adding Material UI
   const useStyles = makeStyles({
     mainStyle: {
-      backgroundColor: "#7f7e7a"
+      backgroundImage: `url(${Question_Mark_Background})`,
+      backgroundSize: "cover"
     },
     cardStyle: {
       backgroundColor: "#140100",

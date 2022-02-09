@@ -4,6 +4,7 @@ import { LeaderboardTable } from "../../components";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from '@material-ui/core';
 import { CardContent, Card, Box } from '@material-ui/core';
+import Question_Mark_Background from '../../images/Question_Mark_Background.png';
 
 function Leaderboard() {
   const navigate = useNavigate();
@@ -14,9 +15,8 @@ function Leaderboard() {
     // Adding Material UI
     const useStyles = makeStyles({
       mainStyle: {
-        backgroundColor: "#7f7e7a",
-        color: "#61DBFB",
-        fontSize: "20px"
+        backgroundImage: `url(${Question_Mark_Background})`,
+        backgroundSize: "cover"
       },
       cardStyle: {
         backgroundColor: "#140100"

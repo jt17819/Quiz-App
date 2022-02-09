@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from '@material-ui/core';
 import { CardContent, Card, Box } from "@material-ui/core";
+import Question_Mark_Background from '../../images/Question_Mark_Background.png'
 
 const Form = () => {
   const [difficultySelection, setdifficultySelection] = useState("");
@@ -75,7 +76,8 @@ const Form = () => {
     // Adding Material UI
     const useStyles = makeStyles({
       mainStyle: {
-        backgroundColor: "#7f7e7a"
+        backgroundImage: `url(${Question_Mark_Background})`,
+        backgroundSize: "cover"
       },
       cardStyle: {
         backgroundColor: "#140100"
@@ -102,7 +104,7 @@ const Form = () => {
     const classes = useStyles();
 
   return (
-    <div className="formContainer" className={classes.mainStyle}>
+    <div className={classes.mainStyle}>
       <Box className={classes.box}>
       <Card className={ classes.cardStyle }>
       <CardContent >
