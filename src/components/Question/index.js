@@ -26,7 +26,7 @@ const Question = (props) => {
 
   return (
     <div role="question-container" id="question-container">
-      <h3 style={{ color: "black" }}>
+      <h3>
         <span id="question-num">
           Question {questionNumber} of {questionArrayLength}:
         </span>{" "}
