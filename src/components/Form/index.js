@@ -35,7 +35,6 @@ const Form = () => {
 
   const numberOfQuestionsChange = (e) => {
     const { value } = e.target;
-    console.log("changing number of questions", value);
     setNumberOfQuestions(value);
   };
 
@@ -63,8 +62,6 @@ const Form = () => {
     const categoryName = categories.find((c) => {
       return c.id === parseInt(category);
     }).name;
-
-    
 
     dispatch(fetchQuiz(apiOptions, categoryName));
     navigate("/lobby");
@@ -115,7 +112,11 @@ const Form = () => {
         <label htmlFor="numOfQuestions" className={classes.writing}>How many questions:</label>
         <select id="numOfQuestions" onChange={numberOfQuestionsChange}>
           {questionNumberOptions.map((e, i) => {
-            return <option value={e}>{parseInt(e)}</option>;
+            return (
+              <option key={e} value={e}>
+                {parseInt(e)}
+              </option>
+            );
           })}
         </select>
         </ul>

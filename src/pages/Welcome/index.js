@@ -20,7 +20,7 @@ const Welcome = () => {
       const value = e.target.value;
       setError("");
       setUserInput(userInput.map((user, i) => (p === i ? value : user)));
-      console.log(userInput);
+      
     };
   };
 

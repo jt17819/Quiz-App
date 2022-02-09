@@ -41,4 +41,9 @@ export const endQuestions = (finalAnswer) => ({
   payload: finalAnswer,
 });
 
+export const moveToNextQuestion = (nextQuestion) => ({
+  type: "NEXT_QUESTION",
+  payload: nextQuestion,
+});
+
 export const getScore = () => ({ type: "GET_SCORE" });
