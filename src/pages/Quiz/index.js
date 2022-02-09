@@ -1,8 +1,12 @@
 import React from "react";
 // import "./style.css";
-import { AnswerCard, Question } from "../../components";
+
+
+
+import { AnswerCard, Question, Timer } from "../../components";
 import { useSelector, useDispatch } from "react-redux";
 import { moveToNextQuestion } from "../../actions";
+
 const Quiz = () => {
   const dispatch = useDispatch();
   const currentQuestion = useSelector(
@@ -42,8 +46,11 @@ const Quiz = () => {
 
   return (
     <div role="quiz-container" id="quiz-page">
+
+      <Timer timer={Timer} />
       <p>{players[playerTurn]} it's your turn</p>
       <Question question={question} index={currentQuestion} />
+
 
       {shuffledAnswers &&
         shuffledAnswers.map((answer) => (
