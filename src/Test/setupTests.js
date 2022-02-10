@@ -10,7 +10,7 @@ import axios from "axios";
 const TestProviders = ({ initState, defaultState }) => {
     initState ||= {
         loading: false,
-        results: [{ question: "", correct_answer: "", answers: [] }],
+        results: [{ question: "", correct_answer: "", answers: [""] }],
         current_question_index: 0,
         score: [],
         playerTurn: 0,
@@ -27,14 +27,12 @@ const TestProviders = ({ initState, defaultState }) => {
         quizReducer:testReducer,
         user: testReducerTwo
       })
-    const testStore = createStore(testReducer, applyMiddleware(thunk))
+    const testStore = createStore(rootReducer, applyMiddleware(thunk))
     return ({ children }) => (
         <Provider store={testStore}>
             { children }
         </Provider>
     )
-
-
 }
 
 const renderWithReduxProvider = (ui, options={}) => {
@@ -46,7 +44,7 @@ jest.mock("axios");
 axios.get.mockResolvedValue({
     data: [
         {
-            question: "French is an official language in Canada", correct_answer: true,
+            question: "Which candy is not made by Mars", correct_answer: "Almond Joy",
         },
     ]
 })
@@ -61,7 +59,7 @@ axios.get.mockResolvedValue({
 
 
 
-global.renderWithReduxProvider = renderWithReduxProvider
+global.renderWithReduxProvider = renderWithReduxProvider;
 global.React = React;
 // global.render = render;
 // global.userEvent = userEvent;
