@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchQuiz } from "../../actions";
 // import { socket } from "../../socket";
 import "./style.css";
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from "@material-ui/core";
 
 const LobbyStatus = ({ host }) => {
   const navigate = useNavigate();
@@ -12,10 +12,12 @@ const LobbyStatus = ({ host }) => {
 
   const [ready, setReady] = useState(false);
   const [category, setCategory] = useState(""); //useSelector((state) => state.config.config.subject) //need to change this back into words
-  const [difficulty, setDifficulty] = useState("test"); //useSelector((state) => state.config.config.difficulty)
-  const [numberOfQs, setNo] = useState("test"); //useSelector((state) => state.config.config.numberOfQs )
+  //   const [difficulty, setDifficulty] = useState(); //useSelector((state) => state.config.config.difficulty)
+  //   const [numberOfQs, setNo] = useState("test"); //useSelector((state) => state.config.config.numberOfQs )
   const room = useSelector((state) => state.user.room);
-  const categoryName = useSelector((state) => state.categoryName);
+  const categoryName = useSelector((state) => state.quizReducer.categoryName);
+  const difficulty = useSelector((state) => state.quizReducer.difficulty);
+  const numOfQs = useSelector((state) => state.quizReducer.numOfQs);
   const usertype = host; //useSelector((state) => state.user.user.type)
   // const usertype = "PLAYER"
 
@@ -30,7 +32,7 @@ const LobbyStatus = ({ host }) => {
 
   // }, [ready]);
 
-//   console.log(ready);
+  //   console.log(ready);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -52,17 +54,32 @@ const LobbyStatus = ({ host }) => {
       backgroundColor: "#140100",
       color: "#61DBFB",
       marginTop: "10px",
-      fontSize: "20px"
-    }
+      fontSize: "20px",
+    },
   });
-  
+
   const classes = useStyles();
 
   if (usertype === "HOST") {
     return (
-      <button id="start-game" onClick={handleClick} className={classes.button}>
-        Start Game
-      </button>
+      <>
+        <p className={classes.button}>
+          You will be answering
+          <span style={{ color: "pink" }}> {numOfQs} </span>
+          questions about
+          <span style={{ color: "pink" }}> {categoryName} </span>
+          at difficulty level
+          <span style={{ color: "pink" }}> {difficulty} </span>
+        </p>
+
+        <button
+          id="start-game"
+          onClick={handleClick}
+          className={classes.button}
+        >
+          Start Game
+        </button>
+      </>
       // onclick fetch questions and go to quiz page
     );
   } else {
@@ -75,15 +92,6 @@ const LobbyStatus = ({ host }) => {
         ) : (
           <p>Waiting for host to start the game...</p>
         )}
-
-        <p>
-          You will be answering
-          <span style={{ color: "pink" }}> {numberOfQs} </span>
-          questions about
-          <span style={{ color: "pink" }}> {categoryName} </span>
-          at difficulty level
-          <span style={{ color: "pink" }}> {difficulty} </span>
-        </p>
       </>
     );
   }
