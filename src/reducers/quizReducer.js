@@ -19,10 +19,16 @@ const quizReducer = (state = init, action) => {
 
   switch (action.type) {
     case "LOAD_QUESTIONS":
+      console.log(action.payload[0]);
       return {
         ...state,
         results: action.payload[0],
         categoryName: action.payload[1],
+        difficulty: action.payload[2] ? action.payload[2] : "Any Difficulty",
+        numOfQs: action.payload[3],
+        playerTurn: 0,
+        score: [],
+        current_question_index: 0,
       };
     case "SET_ERROR":
       return { ...state, error: action.payload };
@@ -50,7 +56,6 @@ const quizReducer = (state = init, action) => {
         // return { ...state, current_question_index: nextQuestionIndex };
         return { ...state, score: scoreArray, playerTurn: playerTurn + 1 };
       }
-
 
     case "END_QUESTIONS":
       console.log(action.payload);
