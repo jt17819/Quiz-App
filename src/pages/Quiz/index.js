@@ -72,7 +72,7 @@ const Quiz = () => {
         <Box className={classes.box}>
       <Card className={ classes.cardStyle }>
       <CardContent  className={classes.writing}>
-      <Timer timer={Timer} />
+      {/* <Timer timer={Timer} /> */}
       <p>{players[playerTurn]} it's your turn</p>
       <Question question={question} index={currentQuestion} />
 

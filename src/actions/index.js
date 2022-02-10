@@ -19,7 +19,12 @@ export const fetchQuiz = (apiOptions, categoryName) => {
 
       dispatch({
         type: "LOAD_QUESTIONS",
-        payload: [quizData, categoryName],
+        payload: [
+          quizData,
+          categoryName,
+          apiOptions.difficulty,
+          apiOptions.amount,
+        ],
       });
     } catch (err) {
       console.warn(err.message);
