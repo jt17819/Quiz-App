@@ -6,7 +6,9 @@ POST http://localhost:5000/leaderboard
 Content-Type: application/json
 
 {
-    "category":"",
+    "body": {
+    "category":"cat",
     "name":"Josh",
     "score":"2"
+}
 }

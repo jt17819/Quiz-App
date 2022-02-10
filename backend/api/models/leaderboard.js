@@ -38,7 +38,7 @@ module.exports = class Leaderboard {
           .find({ category: category })
           .toArray();
         console.log(leaderboardData);
-        const players = leaderboardData[0].players;
+        const players = leaderboardData[0]?leaderboardData[0].players:[]
         console.log(players);
         const player = players.find((p) => p.name === name);
         console.log(player);
